@@ -1,0 +1,130 @@
+MISSION
+- Squad of rovers are to be landed on a Mars Plateau (3 rovers)
+- The rovers navigate the plateau and return their camera footage
+- Rover position is dictated by their grid position followed by the direction they're facing (x, y, N/S/E/W)
+    - Bottom Left corner = (0, 0, N)
+- To control a rover, a string of letters is sent to the rover
+    - These are: 'L' (trun 90 degrees left), 'R' (turn 90 degrees right), 'M' (move forward one grip point)
+
+- Input:
+    - The first line of input is the coordinates for the top right corner of the grid
+    - The subsequent lines of input pertain to the rovers:
+        - Each rover gets 2 lines of input:
+            - The first line gives the rover's position
+                - The position is made up of two integers and a letter for the rover's direction, separated by spaces
+            - The second line is a series of instructions on how to explore the plateau
+
+- Each rover must finish moving before the next rover can move
+
+- Output:
+    - the output should be the rover's final positioning and its heading
+
+- Test:
+    - 5 5
+    - 1 2 N 
+    - LMLMLMLMM
+- Output:
+    - 1 3 N 
+
+
+ASSUMPTIONS
+- user can read and understand english instructions/error messages
+- plateau must be rectangular
+- rovers must not go out of the plateau area
+- rovers ending in the same point/crossing points with another rover does not imply collision
+- user may input any amount of whitespace on either side of an input string
+- user only uses rovers once and not again
+- rovers can start from the same position
+
+
+TEST INPUT 
+- NULL
+    Output: "Incorrect input: inputs must only include a value for x and y coordinates respectively."
+
+- 0 0
+    Output: "Error: Plateau has no width in x and y axis."
+
+- 0 1
+    Output: "Error: Plateau has no width in x axis."
+
+- 1 0
+    Output: "Error: Plateau has no width in y axis."
+
+- 1 1
+    Output: "Input error: Plateau is rectangular (x and y coordinates cannot be equal)"
+
+- T H 
+    Output: "Incorrect input: inputs must be a positive integer."
+
+- 1 2 3
+    Output: "Incorrect input: inputs must only include a value for x and y coordinates respectively."
+
+-       4        5      
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    -     3      2    
+    Output: "Incorrect rover position input."
+
+- 10                      20
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    - T M G 
+    Output: "Rover x coordinate must be a positive integer."
+
+- 10 20
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    - 5 10 H 
+    Output: "Incorrect rover position input: direction must be specified with either one of N/E/S/W.
+
+- 10 20
+    Output: "What is the rover position . . . "
+    - 5 10 N 
+    Output: "What are your movement instructions for the rover?"
+    - jhkl
+    Output: "Incorrect input for rover movement command."
+
+- 10 20
+    Output: "What is the rover position . . . "
+    - 5 10 N 
+    Output: "What are your movement instructions for the rover?"
+    - mmrmmr
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    - 5 10 N 
+    Output: "What are your movement instructions for the rover?"
+    - mmrmmr
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    - 5 10 N
+    Output: "What are your movement instructions for the rover?"
+    - mmmmmmmmmmmm
+        (12 x m commands)
+    Output: "Error: rover went out of plateau boundary on y axis. DANGER!!!CAUTION!!"
+
+- 10 20
+    Output: "What is the rover position . . . "
+    - 5 10 N 
+    Output: "What are your movement instructions for the rover?"
+    - mmrmmr
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    - 5 10 N 
+    Output: "What are your movement instructions for the rover?"
+    - mmrmmr
+    Output: "What is the rover position? (x-coordinate y-coordinate rover-direction)"
+    - 5 10 N
+    Output: "What are your movement instructions for the rover?"
+    - mmmmmmmmmm
+    Output: "Rover 1: 7 12 S
+            Rover 2: 7 12 S 
+            Rover 3: 5 20 N"
+
+- 10 20
+    Output: "What is the rover position . . . "
+    - 11 5 N 
+    Output: "Rover exceeds plateau boundary on x axis."
+
+- 10 20
+    Output: "What is the rover position . . . "
+    - 11 21 n 
+    Output: "Rover exceeds plateau boundary on both the x axis and y axis."
+
+- 10 20
+    Output: "What is the rover position . . . "
+    - 5 21 n 
+    Output: "Rover exceeds plateau boundary on y axis."
