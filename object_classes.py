@@ -4,7 +4,6 @@ class Plateau:
         self.x = x
         self.y = y
 
-
 # define class for rover
 class Rover:
     def __init__(self, x, y, heading):
@@ -18,24 +17,11 @@ class Rover:
             self.y += change_in_rover_position[self.heading]
         elif self.heading == 'E' or self.heading == 'W':
             self.x += change_in_rover_position[self.heading]
-    
-    def turn_left(self):
-        rover_heading_positions = {'N': 0, 'E': 1, 'S': 2, 'W': 3}
-        direction_list = ['N', 'E', 'S', 'W']
-        rover_heading_position_in_direction_list = rover_heading_positions[self.heading]
-        if rover_heading_positions[self.heading] == 0:
-            self.heading = direction_list[3]
-        else:
-            rover_heading_position_in_direction_list -= 1
-            self.heading = direction_list[rover_heading_position_in_direction_list]
-    
-    def turn_right(self):
-        rover_heading_positions = {'N': 0, 'E': 1, 'S': 2, 'W': 3}
-        direction_list = ['N', 'E', 'S', 'W']
-        rover_heading_position_in_direction_list = rover_heading_positions[self.heading]
-        if rover_heading_position_in_direction_list == 3:
-            self.heading = direction_list[0]
-        else:
-            rover_heading_position_in_direction_list += 1
-            self.heading = direction_list[rover_heading_position_in_direction_list]
-        
+
+    def turn(self, direction):
+        self.direction = direction
+        direction_list = ['N', 'E', 'S', 'W', 'N']
+        if direction == 'L':
+            direction_list.reverse()
+        rover_heading_position_in_direction_list = direction_list.index(self.heading) + 1
+        self.heading = direction_list[rover_heading_position_in_direction_list]
